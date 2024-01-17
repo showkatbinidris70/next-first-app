@@ -1,0 +1,347 @@
+@extends('layouts.app')
+
+@section('content')
+
+<div class="content-wrapper">
+  <div style="width: 100%; text-align: center; padding-top: 50px;">
+    <div class="card">
+      <div class="cardHeader card-header">
+         <h3>Employee Information</h3>
+         {{-- <div><button type="button" class="btnInfo btn btn-primary">Back to List</button></div> --}}
+
+         @if (Session::has('success'))
+         <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>Success!</strong> {{Session::get('success')}}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+         @endif
+        
+         
+      </div>
+      <div class="card-body">
+         <form  action="{{route('employeesetup')}}" method="post" enctype="multipart/form-data">
+            {{ csrf_field() }}
+            <fieldset class="customFieldset">
+               <legend class="customLegend">Basic Info:</legend>
+               <div class="row">
+                  
+                  <div class="col-lg-9">
+                     @if (Session::has('ex_msg'))
+                        <div style="color:red">
+                           <p>
+                              {{Session::get('ex_msg')}}
+                           </p>
+                        </div>
+                     @endif
+                     
+                     <div class="row">
+                        <div class="col-lg-6">
+                           <div class="mb-3">
+                              <div class="row">
+                                 <div class="col-lg-4"><label class="form-label">EMP Code<span class="invalid">*</span></label></div>
+                                 <div class="col-lg-8"><input style="{{$errors->has('code_no') ? 'border:1px solid red' : '' }}"  name="code_no" placeholder="" autocomplete="off" type="text" id="code_no" value="{{old('code_no')}}" class="form-control"></div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="col-lg-6">
+                           <div class="mb-3">
+                              <div class="row">
+                                 <div class="col-lg-4"><label class="form-label">First Name<span class="invalid">*</span></label></div>
+                                 <div class="col-lg-8"><input style="{{$errors->has('first_name') ? 'border:1px solid red' : '' }}" name="first_name" placeholder="" autocomplete="off" type="text" value="{{old('first_name')}}" id="first_name" class="form-control"></div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="col-lg-6">
+                           <div class="mb-3">
+                              <div class="row">
+                                 <div class="col-lg-4"><label class="form-label">Last Name</label></div>
+                                 <div class="col-lg-8"><input name="last_name" placeholder="" autocomplete="off" type="text" id="last_name" class="form-control"></div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="col-lg-6">
+                           <div class="mb-3">
+                              <div class="row">
+                                 <div class="col-lg-4"><label class="form-label">Father Name</label></div>
+                                 <div class="col-lg-8"><input name="father_name" placeholder="" autocomplete="off" type="text" id="father_name" class="form-control"></div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="col-lg-6">
+                           <div class="mb-3">
+                              <div class="row">
+                                 <div class="col-lg-4"><label class="form-label">Mother Name</label></div>
+                                 <div class="col-lg-8"><input name="mother_name" placeholder="" autocomplete="off" type="text" id="mother_name" class="form-control"></div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="col-lg-6">
+                           <div class="mb-3">
+                              <div class="row">
+                                 <div class="col-lg-4"><label class="form-label">NID no</label></div>
+                                 <div class="col-lg-8"><input name="nid_no" placeholder="" autocomplete="off" type="text" id="nid_no" class="form-control"></div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="col-lg-6">
+                           <div class="mb-3">
+                              <div class="row">
+                                 <div class="col-lg-4">
+                                    <label class="form-label">Date of Birth</label>
+                                 </div>
+                                 <div class="col-lg-8">
+                                    <div class="react-datepicker-wrapper">
+                                       <div class="react-datepicker__input-container">
+                                          {{-- <input type="text" id="dob" autocomplete="off" name="date_of_birth" placeholder="Select date of birth" class="form-control datepicker" value="{{old('date_of_birth')}}"> --}}
+                                          <input type="date" id="" autocomplete="off" name="date_of_birth" placeholder="Select date of birth" class="form-control" value="{{old('date_of_birth')}}">
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="col-lg-6">
+                           <div class="mb-3">
+                              <div class="row">
+                                 <div class="col-lg-4">
+                                    <label class="form-label">Mobile<span class="invalid">*</span>
+                                    </label>
+                                 </div>
+                                 <div class="col-lg-8">
+                                    <input name="mobile" style="{{$errors->has('mobile') ? 'border:1px solid red' : '' }}" placeholder="" autocomplete="off" type="text" id="mobile" value="{{old('mobile')}}" class="form-control">
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="col-lg-6">
+                           <div class="mb-3">
+                              <div class="row">
+                                 <div class="col-lg-4">
+                                    <label class="form-label">Email<span class="invalid">*</span>
+                                    </label>
+                                 </div>
+                                 <div class="col-lg-8">
+                                    <input name="email" style="{{$errors->has('email') ? 'border:1px solid red' : '' }}" placeholder="" value="{{old('email')}}" autocomplete="off" type="text" id="email" class="form-control">
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="col-lg-12">
+                           <div class="mb-3">
+                              <div class="row">
+                                 <div class="col-lg-2"><label class="form-label">Address</label></div>
+                                 <div class="col-lg-10"><input name="address" placeholder="" autocomplete="off" type="text" id="address" class="form-control"></div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-lg-3"><img id="profile_photo_container" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAUMAAAEvCAYAAADfBaMmAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAANfSURBVHhe7dRBAQAgDAAh+2dYBTPO6yEPKnDuzAL8ToYAkSFAZAgQGQJEhgCRIUBkCBAZAkSGAJEhQGQIEBkCRIYAkSFAZAgQGQJEhgCRIUBkCBAZAkSGAJEhQGQIEBkCRIYAkSFAZAgQGQJEhgCRIUBkCBAZAkSGAJEhQGQIEBkCRIYAkSFAZAgQGQJEhgCRIUBkCBAZAkSGAJEhQGQIEBkCRIYAkSFAZAgQGQJEhgCRIUBkCBAZAkSGAJEhQGQIEBkCRIYAkSFAZAgQGQJEhgCRIUBkCBAZAkSGAJEhQGQIEBkCRIYAkSFAZAgQGQJEhgCRIUBkCBAZAkSGAJEhQGQIEBkCRIYAkSFAZAgQGQJEhgCRIUBkCBAZAkSGAJEhQGQIEBkCRIYAkSFAZAgQGQJEhgCRIUBkCBAZAkSGAJEhQGQIEBkCRIYAkSFAZAgQGQJEhgCRIUBkCBAZAkSGAJEhQGQIEBkCRIYAkSFAZAgQGQJEhgCRIUBkCBAZAkSGAJEhQGQIEBkCRIYAkSFAZAgQGQJEhgCRIUBkCBAZAkSGAJEhQGQIEBkCRIYAkSFAZAgQGQJEhgCRIUBkCBAZAkSGAJEhQGQIEBkCRIYAkSFAZAgQGQJEhgCRIUBkCBAZAkSGAJEhQGQIEBkCRIYAkSFAZAgQGQJEhgCRIUBkCBAZAkSGAJEhQGQIEBkCRIYAkSFAZAgQGQJEhgCRIUBkCBAZAkSGAJEhQGQIEBkCRIYAkSFAZAgQGQJEhgCRIUBkCBAZAkSGAJEhQGQIEBkCRIYAkSFAZAgQGQJEhgCRIUBkCBAZAkSGAJEhQGQIEBkCRIYAkSFAZAgQGQJEhgCRIUBkCBAZAkSGAJEhQGQIEBkCRIYAkSFAZAgQGQJEhgCRIUBkCBAZAkSGAJEhQGQIEBkCRIYAkSFAZAgQGQJEhgCRIUBkCBAZAkSGAJEhQGQIEBkCRIYAkSFAZAgQGQJEhgCRIUBkCBAZAkSGAJEhQGQIEBkCRIYAkSFAZAgQGQJEhgCRIUBkCBAZAkSGAJEhQGQIEBkCRIYAkSFAZAgQGQJEhgCRIUBkCBAZAkSGAJEhQGQIEBkCRIYAkSFAZAgQGQJEhgCRIUBkCBAZAkSGAJEhQGQIEBkCRIYAkSHAzD72mFdUSe9WrAAAAABJRU5ErkJggg==" alt="" style="width: 100%;">
+                     <input id="profile_photo_file" type="file" name="employee_image" class="btn btnCancel w-100 mt-2" value="Upload Profile Picture"/>
+                     @if ($errors->has('employee_image'))
+                         @foreach ($errors->get('employee_image') as $msg)
+                          <p style="color:red">{{$msg}}</p>
+                         @endforeach
+                         
+                     @endif
+                  </div>
+               </div>
+            </fieldset>
+            <fieldset class="customFieldset mt-4">
+               <legend class="customLegend">ORG Info:</legend>
+               <div class="row">
+                  <div class="mb-3">
+                     <div class="row">
+                        <div class="col-lg-2"><label class="form-label">Organization Type<span class="invalid">*</span></label></div>
+                        <div class="col-lg-4">
+                          <select style="{{$errors->has('select_org_type') ? 'border:1px solid red' : '' }}" id="select_org_type" name="select_org_type" class="form-select" aria-label="Default select example">
+                            <option selected>Select</option>
+                            <option {{old('select_org_type')==1 ? "selected" : ""}} value="1">UNHCR</option>
+                            <option {{old('select_org_type')==2 ? "selected" : ""}} value="2">PARTNER</option>
+                          </select>
+                        </div>
+                     </div>
+
+                     {{-- Unhcr container start  --}}
+                     <br>
+                     <div style="{{old('select_org_type')==1 ? "" : 'display:none' }}" id="unhcr_type_container" class="row">
+                      <div class="col-lg-6">
+                         <div class="mb-3">
+                            <div class="row">
+                               <div class="col-lg-4"><label class="form-label">Designation</label></div>
+                               <div class="col-lg-8"><input name="designation" placeholder="" autocomplete="off" type="text" id="designation" value="{{old('designation')}}" class=" form-control"><span class="invalid"></span></div>
+                            </div>
+                         </div>
+                      </div>
+                      <div class="col-lg-6">
+                         <div class="mb-3">
+                            <div class="row">
+                               <div class="col-lg-4"><label class="form-label">Joining Date</label></div>
+                               <div class="col-lg-8">
+                                  <div class="react-datepicker-wrapper">
+                                     <div class="react-datepicker__input-container">
+                                       {{-- <input type="text" id="joining_date" name="joining_date" autocomplete="off" placeholder="Select joining date" class="form-control" value="{{old('joining_date')}}"> --}}
+                                       <input type="date" id="" name="joining_date" autocomplete="off" placeholder="Select joining date" class="form-control" value="{{old('joining_date')}}">
+                                    </div>
+                                  </div>
+                               </div>
+                            </div>
+                         </div>
+                      </div>
+                   </div>
+                     {{-- Unhcr container end --}}
+
+
+                     {{-- Partner container  start  --}}
+                     <div style="{{old('select_org_type')==2 ? "" : 'display:none' }}" id="partner_type_container" class="row">
+                      <div class="col-lg-6">
+                         <div class="mb-3">
+                            <div class="row">
+                               <div class="col-lg-4"><label class="form-label">Partner Agency</label></div>
+                               <div class="col-lg-8">
+                                
+                                  <select class="form-select" name="partner_agency" aria-label="Default select example">
+                                    <option value="">Partner Agency</option>
+                                    @foreach ($partners as $item)
+                                      <option {{old('partner_agency')!=null && old('partner_agency')==$item->id ? "selected" : ""}} value="{{$item->id}}">{{$item->partner_name}}</option>
+                                    @endforeach
+                                    
+                                    
+                                  </select>
+                                
+                               </div>
+                            </div>
+                         </div>
+                      </div>
+                      <div class="d-none col-lg-6">
+                         <div class="mb-3">
+                            <div class="row">
+                               <div class="col-lg-4"><label class="form-label">Facility Name</label></div>
+                               <div class="col-lg-8">
+                                  <div class=" css-b62m3t-container">
+                                     <span id="react-select-13-live-region" class="css-1f43avz-a11yText-A11yText"></span><span aria-live="polite" aria-atomic="false" aria-relevant="additions text" class="css-1f43avz-a11yText-A11yText"></span>
+                                     <div class=" css-1s2u09g-control">
+                                        <div class=" css-319lph-ValueContainer">
+                                           <div class=" css-14el2xx-placeholder" id="react-select-13-placeholder">Select...</div>
+                                           <div class=" css-6j8wv5-Input" data-value=""><input class="" autocapitalize="none" autocomplete="off" autocorrect="off" id="react-select-13-input" spellcheck="false" tabindex="0" type="text" aria-autocomplete="list" aria-expanded="false" aria-haspopup="true" role="combobox" aria-describedby="react-select-13-placeholder" value="" style="color: inherit; background: 0px center; opacity: 1; width: 100%; grid-area: 1 / 2 / auto / auto; font: inherit; min-width: 2px; border: 0px; margin: 0px; outline: 0px; padding: 0px;"></div>
+                                        </div>
+                                        <div class=" css-1hb7zxy-IndicatorsContainer">
+                                           <span class=" css-1okebmr-indicatorSeparator"></span>
+                                           <div class=" css-tlfecz-indicatorContainer" aria-hidden="true">
+                                              <svg height="20" width="20" viewBox="0 0 20 20" aria-hidden="true" focusable="false" class="css-tj5bde-Svg">
+                                                 <path d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"></path>
+                                              </svg>
+                                           </div>
+                                        </div>
+                                     </div>
+                                     <input name="facility_id" type="hidden" value="">
+                                  </div>
+                               </div>
+                            </div>
+                         </div>
+                      </div>
+                      <div class="d-none col-lg-6">
+                         <div class="mb-3">
+                            <div class="row">
+                               <div class="col-lg-4"><label class="form-label">Department Name</label></div>
+                               <div class="col-lg-8">
+                                  <div class=" css-b62m3t-container">
+                                     <span id="react-select-15-live-region" class="css-1f43avz-a11yText-A11yText"></span><span aria-live="polite" aria-atomic="false" aria-relevant="additions text" class="css-1f43avz-a11yText-A11yText"></span>
+                                     <div class=" css-1s2u09g-control">
+                                        <div class=" css-319lph-ValueContainer">
+                                           <div class=" css-14el2xx-placeholder" id="react-select-15-placeholder">Select...</div>
+                                           <div class=" css-6j8wv5-Input" data-value=""><input class="" autocapitalize="none" autocomplete="off" autocorrect="off" id="react-select-15-input" spellcheck="false" tabindex="0" type="text" aria-autocomplete="list" aria-expanded="false" aria-haspopup="true" role="combobox" aria-describedby="react-select-15-placeholder" value="" style="color: inherit; background: 0px center; opacity: 1; width: 100%; grid-area: 1 / 2 / auto / auto; font: inherit; min-width: 2px; border: 0px; margin: 0px; outline: 0px; padding: 0px;"></div>
+                                        </div>
+                                        <div class=" css-1hb7zxy-IndicatorsContainer">
+                                           <span class=" css-1okebmr-indicatorSeparator"></span>
+                                           <div class=" css-tlfecz-indicatorContainer" aria-hidden="true">
+                                              <svg height="20" width="20" viewBox="0 0 20 20" aria-hidden="true" focusable="false" class="css-tj5bde-Svg">
+                                                 <path d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"></path>
+                                              </svg>
+                                           </div>
+                                        </div>
+                                     </div>
+                                     <input name="dispensary_id" type="hidden" value="">
+                                  </div>
+                               </div>
+                            </div>
+                         </div>
+                      </div>
+                      <div class="col-lg-6">
+                         <div class="mb-3">
+                            <div class="row">
+                               <div class="col-lg-4"><label class="form-label">Designation</label></div>
+                               <div class="col-lg-8"><input name="partner_designation" value="{{old('partner_designation')}}" placeholder="" autocomplete="off" type="text" id="designation" class=" form-control"><span class="invalid"></span></div>
+                            </div>
+                         </div>
+                      </div>
+                      <div class="col-lg-6">
+                         <div class="mb-3">
+                            <div class="row">
+                               <div class="col-lg-4"><label class="form-label">Joining Date</label></div>
+                               <div class="col-lg-8">
+                                  <div class="react-datepicker-wrapper">
+                                     <div class="react-datepicker__input-container">
+                                       <input type="text"  id="partner_joining_date" name="partner_joining_date" autocomplete="off" placeholder="Select joining date" class="form-control" value="{{old('partner_joining_date')}}">
+                                    </div>
+                                  </div>
+                               </div>
+                            </div>
+                         </div>
+                      </div>
+                   </div>
+                     {{-- Partner container end  --}}
+                  </div>
+               </div>
+            </fieldset>
+            <div class="mt-3">
+               <div class="row">
+                  <div class="col-lg-2"><label class="form-label">Status</label></div>
+                  <div class="col-lg-1">
+                     <div class="form-switch">
+                        <input checked name="status" type="checkbox" id="user-status-switch" class="form-check-input">
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="formFooter"><a href="{{url('employeelist')}}" class="btnCancel me-2 btn btn-secondary">Close</a><button type="submit" class="btnSuccess btn btn-success">Create New</button></div>
+         </form>
+      </div>
+   </div>
+  </div>
+</div>
+@section('individual-script')
+<script>
+   // $('partner_agency_select').selectpicker();
+   $( document ).ready(function() {
+      // $('#dob').daterangepicker({
+      //    dateFormat: "dd-M-yy"
+      // });
+      $('#dob').datepicker({dateFormat: "dd-M-yy"});
+
+
+      $('#joining_date').datepicker({
+            dateFormat: "dd-M-yy"
+      });
+
+
+      $('#partner_joining_date').datepicker({
+            dateFormat: "dd-M-yy"
+      });
+
+
+
+   });
+ </script>
+@endsection
+
+  
+
+</script>
+@endsection
